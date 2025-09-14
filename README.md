@@ -10,6 +10,11 @@
 ## Descrição do Projeto
 **Amina** é uma startup social focada em acolher, apoiar e empoderar mulheres em situação de vulnerabilidade. Por meio de uma aplicação web acessível e gratuita, conectamos mulheres a uma rede de apoio segura, incluindo profissionais de saúde mental, assessoria jurídica e oportunidades de emprego. Inspirada na força da rainha guerreira Amina de Zazzau, nossa missão é usar a tecnologia como uma ponte para a liberdade, segurança e autonomia feminina.
 
+## Fluxo de Navegação
+A página inicial (index.html) contém o acesso ao login e a introdução ao projeto.
+O usuário deve preencher nome e senha **(para testes, qualquer senha é aceita).**
+Após o login, o sistema direciona para a Home, onde estão as principais funcionalidades.
+
 ## Instruções de Setup
 Este projeto foi desenvolvido utilizando apenas tecnologias web front-end (HTML, CSS, JavaScript) e não requer um ambiente de back-end para ser executado.
 
