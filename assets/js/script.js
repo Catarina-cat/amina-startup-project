@@ -96,6 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
         resposta = "Claro! Você pode me contar o que está acontecendo e eu vou te apoiar da melhor forma. Se for uma emergência, ligue para 190 ou 180.";
       } else if (t.includes("obrigada") || t.includes("obrigado")) {
         resposta = "De nada! Estarei sempre aqui quando precisar conversar. Se cuida!";
+      } else if (t.includes("sim") || t.includes("pode ser")) {
+        resposta = "Estou aqui para te ouvir!";
       } else if (t.includes("tchau") || t.includes("até mais")) {
         resposta = "Tudo bem. Se cuida, você não está sozinha. Estarei aqui sempre que precisar conversar.";
       }
