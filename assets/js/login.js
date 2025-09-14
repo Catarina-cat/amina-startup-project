@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const credResult = document.getElementById('cred-result');
 
     // Função para registrar o login e redirecionar
-    function successfulLogin(redirectPage = 'index.html') {
+    function successfulLogin(redirectPage = 'home.html') {
         // >>> PASSO CHAVE: Salva o estado de login no sessionStorage <<<
         sessionStorage.setItem('isLoggedIn', 'true');
         
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (role === 'usuario') {
             alert('Bem-vinda à Amina!');
-            //window.location.href = 'index.html';
+            //window.location.href = 'home.html';
             successfulLogin(); // Chama a nova função
         } else if (role === 'saude' || role === 'juridico') {
             loginSection.style.display = 'none';
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             credResult.style.color = 'green';
             credResult.textContent = '✅ Credencial válida. Acesso permitido. Redirecionando...';
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = 'home.html';
             }, 2000);
         } else {
             credResult.style.color = 'red';

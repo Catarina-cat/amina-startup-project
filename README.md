@@ -13,7 +13,7 @@
 ## Fluxo de Navegação
 A página inicial (index.html) contém o acesso ao login e a introdução ao projeto.
 O usuário deve preencher nome e senha **(para testes, qualquer senha é aceita).**
-**Perfil de acesso:** Usuária buscando apoio
+**Perfil de acesso:** Usuária buscando apoio.
 Após o login, o sistema direciona para a Home, onde estão as principais funcionalidades.
 
 ## Instruções de Setup
