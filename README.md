@@ -1,6 +1,6 @@
 # Projeto: Startup Explorer - Amina
 
-## ETEC [Nome da sua ETEC]
+## ETEC - Escola Técnica Estadual Rodrigues de Abreu - Bauru
 
 ## Integrantes da Equipe
 * Eloá Vitória Nunes – Líder
