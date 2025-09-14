@@ -3,43 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amina - Você não está sozinha</title>
+  <title>Login - Amina</title>
   <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-  <header class="site-header">
-    <a href="index.html"><img src="assets/images/logo.png" alt="Logo da Startup Amina" class="logo"></a>
-    <h1>AMINA</h1>
-    <p class="slogan">"Com AMINA, você não está sozinha."</p>
-    <nav>
-      <button class="menu-toggle" aria-label="Abrir menu">☰</button>
-      <ul class="main-nav">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobre.html">Sobre Nós</a></li>
-        <li><a href="servicos.html">Serviços</a></li>
-        <li><a href="contato.html">Contato</a></li>
-        <li><a href="inteligencia-artificial.html">Sua Amiga IA</a></li>
-        <li><a href="apoio-psicologico.html">Apoio</a></li>
-        <li><a href="denuncia-anonima.html">Denúncia</a></li>
-        <li><a href="orientacao-juridica.html">Orientacao jurídica</a></li>
-        <li><a href="rede-apoio.html">Rede Apoio</a></li>
-        <li><a href="#" id="logout-button">Sair</a></li>
-      </ul>
-    </nav>
-  </header>
+  </head>
+<body class="login-page">
 
   <main>
-    <section class="content-section">
-      <h2>Bem-vinda à AMINA</h2>
-      <p>AMINA é uma startup social voltada para acolher, apoiar e empoderar mulheres em situação de vulnerabilidade, especialmente aquelas que enfrentam relacionamentos tóxicos, abusivos ou situações de risco. Por meio de uma aplicação acessível e gratuita, conectamos essas mulheres a profissionais de saúde mental, assessoria jurídica, oportunidades de emprego e uma rede segura de apoio.</p>
-      <p>Nossa proposta é usar a tecnologia como ponte para a liberdade e reconstrução. Com recursos como atendimento psicológico, orientação jurídica, denúncias anônimas e comunidades de apoio, AMINA busca garantir que nenhuma mulher esteja sozinha em sua jornada por segurança, dignidade e autonomia.</p>
+    <section id="login-section" class="content-section login-container">
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="Logo da Startup Amina" class="logo" style="margin-bottom: 1rem;">
+      </a>
+      <h2>Acesso à Plataforma</h2>
+      <form id="login-form" class="form">
+        <div class="form-group">
+          <label for="username">Usuário (opcional)</label>
+          <input type="text" id="username" placeholder="Digite seu usuário">
+        </div>
+        <div class="form-group">
+          <label for="password">Senha (opcional)</label>
+          <input type="password" id="password" placeholder="Digite sua senha">
+        </div>
+        <div class="form-group">
+          <label for="role">Selecione seu perfil de acesso</label>
+          <select id="role" required>
+            <option value="">-- Selecione uma opção --</option>
+            <option value="usuario">Sou uma usuária buscando apoio</option>
+            <option value="saude">Sou da área de Saúde Mental</option>
+            <option value="juridico">Sou da área Jurídica</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Entrar</button>
+      </form>
+    </section>
+
+    <section id="cred-section" class="content-section login-container">
+       <a href="index.html">
+        <img src="assets/images/logo.png" alt="Logo da Startup Amina" class="logo" style="margin-bottom: 1rem;">
+      </a>
+      <h2>Verificação de Credencial</h2>
+      <form id="cred-form" class="form">
+        <div class="form-group">
+          <label for="cred-type">Tipo de Profissional</label>
+          <input type="text" id="cred-type" readonly>
+        </div>
+        <div class="form-group">
+          <label for="credential">Número da Credencial</label>
+          <input type="text" id="credential" placeholder="Ex: CRM-12345 ou OAB-67890" required>
+        </div>
+        <button type="submit" class="btn-submit">Verificar</button>
+        <p id="cred-result"></p>
+      </form>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <p>&copy; 2025 Amina. Todos os direitos reservados.</p>
-  </footer>
   
-  <script src="assets/js/script.js"></script>
+  <script src="assets/js/login.js"></script>
 </body>
 </html>
