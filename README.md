@@ -25,3 +25,9 @@ Este projeto foi desenvolvido utilizando apenas tecnologias web front-end (HTML,
 
 3.  **Abra o arquivo `index.html` no seu navegador de preferência.**
     * Não há necessidade de instalar dependências. O site funcionará localmente.
+
+## 🌐 Acesso ao Projeto
+
+Você pode acessar o site publicado pelo GitHub Pages através do link abaixo:
+
+🔗 [Clique aqui para acessar](https://catarina-cat.github.io/amina-startup-project/)
