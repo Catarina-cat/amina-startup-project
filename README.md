@@ -21,7 +21,7 @@ Este projeto foi desenvolvido utilizando apenas tecnologias web front-end (HTML,
 
 1.  **Clone o repositório (ou baixe os arquivos):**
     ```bash
-    git clone [https://github.com/seu-usuario/amina-startup-project.git](https://github.com/seu-usuario/amina-startup-project.git)
+    git clone [https://github.com/Catarina-cat/amina-startup-project.git](https://github.com/Catarina-cat/amina-startup-project.git)
     ```
 
 2.  **Navegue até o diretório do projeto:**
