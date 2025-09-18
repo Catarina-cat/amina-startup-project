@@ -37,3 +37,6 @@ Este projeto foi desenvolvido utilizando apenas tecnologias web front-end (HTML,
 Você pode acessar o site publicado pelo GitHub Pages através do link abaixo:
 
 🔗 [Clique aqui para acessar](https://catarina-cat.github.io/amina-startup-project/)
+
+## 🌐 Vídeo de Apresentação
+🔗 [Clique aqui para assistir] (https://drive.google.com/file/d/1RwZJ4vbrnLql-R90AfrW01G3EPntVYuj/view)
