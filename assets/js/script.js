@@ -1,4 +1,5 @@
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+import { enviarPrompt } from './api.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- LÓGICA DO MENU HAMBÚRGUER ---
@@ -121,27 +122,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       //Sugestão: vocês precisam bloquear o botão para que não seja possível requisitar mais de uma vez enquanto a API não retornou as informações
 
-      //Tenta a requisição com o backend (server.js)
+      //Tenta a requisição com a API
       try {
-        const resp = await fetch("/api/gemini", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: texto }),
-        });
-        const data = await resp.json(); //Obtém o retorno e transforma em objeto javascript
-        console.log(data); //Log para verificação do conteúdo retornado pela API
+        const resp = await enviarPrompt(texto);
+        console.log(resp); //Log para verificação do conteúdo retornado pela API
         typing.remove();
-        adicionarMensagem("Amina", data.resposta || "Não entendi, tente novamente.", "amina");
+        adicionarMensagem("Amina", resp || "Não entendi, tente novamente.", "amina");
       } catch {
         //Caso dê problema, lança a mensagem de erro
         typing.remove();
         adicionarMensagem("Amina", "Erro ao conectar ao servidor.", "amina");
       }
-      
-      // setTimeout(() => {
-      //   typing.remove();
-      //   adicionarMensagem("Amina", resposta, "amina");
-      // }, 1500);
     };
 
     // Função para enviar a mensagem do usuário
