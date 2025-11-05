@@ -1,234 +1,291 @@
-/*
- * Seção: Layout específico do Mapa (mapa.html)
- * Este arquivo deve ser importado em seu assets/css/main.css
+/* * Arquivo: mapa.js
+ * Descrição: Lógica de inicialização do mapa, geolocalização e interação com APIs de rotas e busca.
  */
-.map-layout {
-    display: flex;
-    flex: 1; 
-    position: relative;
-    /* ESSENCIAL: Garante que o main ocupa todo o espaço vertical restante */
-    min-height: calc(100vh - var(--altura-do-header, 150px)); 
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
 
-#map {
-    width: 100%;
-    flex-grow: 1;
-    transition: margin-left 0.3s ease;
-    min-height: 500px;
-    
-    margin-left: 340px; 
-    box-sizing: border-box; /* Garante que o mapa não ultrapasse a tela */
-}
+// Configurações da aplicação
+const CONFIG = {
+    DEFAULT_LOCATION: {
+        lat: -23.55052,
+        lon: -46.633308
+    },
+    SEARCH_RADIUS: 4000, // metros
+    CACHE_DURATION: 5 * 60 * 1000 // 5 minutos
+};
 
-/* SIDEBAR (MENU LATERAL) */
-.sidebar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 300px;
-    background: var(--cor-neutra-clara); 
-    padding: 20px;
-    overflow-y: auto;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
-    color: var(--cor-escura);
-}
-.sidebar.collapsed {
-    transform: translateX(-100%);
-}
+// Inicializa mapa
+const map = L.map('map').setView([CONFIG.DEFAULT_LOCATION.lat, CONFIG.DEFAULT_LOCATION.lon], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap',
+    maxZoom: 18
+}).addTo(map);
 
-/* BOTÃO DE EXPANSÃO/CONTRAÇÃO */
-.toggle-btn {
-    position: absolute;
-    top: 20px;
-    right: -40px;
-    width: 35px;
-    height: 35px;
-    background: var(--cor-primaria);
-    border-radius: 50%;
-    cursor: pointer;
-    text-align: center;
-    line-height: 35px;
-    font-weight: bold;
-    color: var(--cor-clara);
-    transition: background 0.3s, transform 0.2s;
-    border: none;
-    outline: none;
-}
-.toggle-btn:hover, .toggle-btn:focus {
-    background: var(--cor-hover);
-    transform: scale(1.05);
-}
+// Elementos da UI
+const statusEl = document.getElementById('status');
+const locateBtn = document.getElementById('locateBtn');
+const delegaciaListEl = document.getElementById('delegaciaList');
+const sidebar = document.getElementById('sidebar');
 
-/* BOTÃO DE AÇÃO (BUSCAR DELEGACIAS) */
-.btn {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    background: var(--cor-primaria);
-    border: none;
-    color: var(--cor-clara);
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-.btn:hover, .btn:focus {
-    background: var(--cor-hover);
-    transform: translateY(-2px);
-}
-.btn:disabled {
-    background: var(--cor-borda);
-    cursor: not-allowed;
-    transform: none;
-}
+// Estado da aplicação
+let userMarker = null;
+let destMarker = null;
+let routeLayer = null;
+let userLocation = CONFIG.DEFAULT_LOCATION;
 
-/* ITENS DA LISTA */
-.list-item {
-    padding: 12px 15px;
-    margin-bottom: 8px;
-    background: var(--cor-clara);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 3px solid transparent;
-    color: var(--cor-escura);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-.list-item:hover, .list-item:focus {
-    background: var(--cor-neutra-clara);
-    transform: translateX(3px);
-}
-.list-item.active {
-    background: var(--cor-secundaria);
-    border-left-color: var(--cor-primaria);
-    transform: translateX(3px);
-}
-.distance {
-    font-size: 12px;
-    color: var(--cor-primaria);
-    font-weight: bold;
-}
+// ----------------------------
+// Funções auxiliares de UI
+// ----------------------------
+function setStatus(text, type = 'info') {
+    statusEl.innerHTML = '';
+    statusEl.className = '';
 
-/* CABEÇALHO DO SIDEBAR */
-.header {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-.header .logo { 
-    width: 32px;
-    height: 32px;
-    background: var(--cor-primaria);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: var(--cor-clara);
-}
-.title {
-    color: var(--cor-primaria);
-    margin: 0;
-    font-size: 1.4rem;
-}
-.subtitle {
-    font-size: 0.9rem;
-    color: var(--cor-escura);
-    opacity: 0.8;
-    margin-top: 5px;
-}
-
-/*
- * Seção: STATUS DE MENSAGENS, LOADING E NO-RESULTS
- */
-#status {
-    margin-top: 15px;
-    font-size: 14px;
-    color: var(--cor-escura); 
-    line-height: 1.4;
-    padding: 10px;
-    border-radius: 6px;
-    background: rgba(0, 0, 0, 0.05); 
-}
-
-.status-loading {
-    color: var(--cor-primaria); 
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.status-error {
-    color: #cc3333; 
-    background: rgba(204, 51, 51, 0.1);
-}
-
-.status-success {
-    color: #33cc33; 
-    background: rgba(51, 204, 51, 0.1);
-}
-
-.spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
-    border-top-color: var(--cor-primaria);
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.no-results {
-    text-align: center;
-    padding: 20px;
-    color: var(--cor-escura);
-    font-style: italic;
-}
-
-
-/* Responsividade do Mapa */
-@media (max-width: 480px) {
-    .map-layout {
-        position: absolute; 
-        top: var(--altura-do-header, 150px);
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: auto;
-    }
-    .sidebar {
-        width: 100%;
-        /* Correção para garantir que o sidebar feche e abra corretamente em mobile */
-        transform: translateX(-100%);
-    }
-    .sidebar:not(.collapsed) {
-         transform: translateX(0);
-    }
-    .toggle-btn {
-        right: 15px;
-        top: 15px;
-        position: fixed; 
-    }
-    .sidebar:not(.collapsed) ~ #map {
-        pointer-events: none;
-        filter: blur(2px);
+    if (type === 'loading') {
+        statusEl.classList.add('status-loading');
+        statusEl.innerHTML = <div class="spinner"></div><span>${text}</span>;
+    } else if (type === 'error') {
+        statusEl.classList.add('status-error');
+        statusEl.textContent = text;
+    } else if (type === 'success') {
+        statusEl.classList.add('status-success');
+        statusEl.textContent = text;
+    } else {
+        statusEl.textContent = text;
     }
 }
+
+function toggleButtonLoading(button, isLoading) {
+    if (isLoading) {
+        button.disabled = true;
+        button.innerHTML = <div class="spinner"></div><span>Buscando...</span>;
+    } else {
+        button.disabled = false;
+        button.innerHTML = <span>Buscar delegacias próximas</span>;
+    }
+}
+
+// ----------------------------
+// ✅ NOVA FUNÇÃO: Buscar delegacias (usando Overpass API — sem chave!)
+// ----------------------------
+async function buscarDelegacias(lat, lon) {
+  const overpassUrl = "https://overpass-api.de/api/interpreter";
+  const query = `
+    [out:json];
+    (
+      node["amenity"="police"](around:${CONFIG.SEARCH_RADIUS},${lat},${lon});
+      way["amenity"="police"](around:${CONFIG.SEARCH_RADIUS},${lat},${lon});
+      relation["amenity"="police"](around:${CONFIG.SEARCH_RADIUS},${lat},${lon});
+    );
+    out center;
+  `;
+
+  const response = await fetch(overpassUrl, {
+    method: "POST",
+    body: query,
+  });
+
+  if (!response.ok) {
+    throw new Error("Falha ao buscar delegacias (Overpass API).");
+  }
+
+  const data = await response.json();
+  if (!data.elements || data.elements.length === 0) {
+    return [];
+  }
+
+  // Mapeia os resultados (node/way/relation)
+  const delegacias = data.elements.map(el => ({
+    nome: el.tags?.name || "Delegacia de Polícia",
+    lat: el.lat || el.center?.lat,
+    lon: el.lon || el.center?.lon
+  })).filter(d => d.lat && d.lon);
+
+  return delegacias;
+}
+
+// ----------------------------
+// Buscar rota (mantemos via OpenRouteService — opcional, pode funcionar mesmo sem chave)
+// ----------------------------
+async function buscarRota(startCoords, endCoords) {
+  // Usa a API de rotas gratuita do openrouteservice
+  const apiKey = "5b3ce3597851110001cf6248f8f45a36a1e341eea5a17a4f4b4a08f8"; // 🔑 Chave pública de demonstração
+  const start = ${startCoords[1]},${startCoords[0]};
+  const end = ${endCoords[1]},${endCoords[0]};
+
+  const response = await fetch(https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${start}&end=${end});
+
+  if (!response.ok) {
+    throw new Error('Falha ao calcular a rota.');
+  }
+
+  const data = await response.json();
+  const route = data.features[0];
+  const coords = route.geometry.coordinates.map(coord => [coord[1], coord[0]]);
+
+  return {
+    coords: coords,
+    summary: route.properties.summary
+  };
+}
+
+// ----------------------------
+// Obter localização do usuário
+// ----------------------------
+function obterLocalizacaoUsuario() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject(new Error("Geolocalização não é suportada pelo seu navegador."));
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        });
+      },
+      (error) => {
+        let errorMessage = "Ocorreu um erro desconhecido.";
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = "Permissão de localização negada.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = "Informação de localização indisponível.";
+            break;
+          case error.TIMEOUT:
+            errorMessage = "Tempo limite ao obter localização.";
+            break;
+        }
+        reject(new Error(errorMessage));
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  });
+}
+
+// ----------------------------
+// Inicializar o mapa
+// ----------------------------
+async function inicializarMapa() {
+    try {
+        setStatus('Obtendo sua localização...', 'loading');
+        userLocation = await obterLocalizacaoUsuario();
+
+        if (userMarker) map.removeLayer(userMarker);
+        userMarker = L.marker([userLocation.lat, userLocation.lon])
+            .addTo(map)
+            .bindPopup("Sua localização atual")
+            .openPopup();
+
+        map.setView([userLocation.lat, userLocation.lon], 14);
+        setStatus('Localização obtida com sucesso!', 'success');
+    } catch (error) {
+        console.error('Erro ao obter localização:', error);
+
+        userLocation = CONFIG.DEFAULT_LOCATION;
+        if (userMarker) map.removeLayer(userMarker);
+        userMarker = L.marker([userLocation.lat, userLocation.lon])
+            .addTo(map)
+            .bindPopup("Localização simulada (São Paulo)")
+            .openPopup();
+
+        map.setView([userLocation.lat, userLocation.lon], 14);
+        setStatus(Usando localização padrão: ${error.message}, 'error');
+    }
+}
+
+// ----------------------------
+// Evento do botão "Buscar delegacias"
+// ----------------------------
+locateBtn.onclick = async () => {
+    try {
+        toggleButtonLoading(locateBtn, true);
+        setStatus('Buscando delegacias próximas...', 'loading');
+
+        const delegacias = await buscarDelegacias(userLocation.lat, userLocation.lon);
+        delegaciaListEl.innerHTML = "";
+
+        if (delegacias.length === 0) {
+            delegaciaListEl.innerHTML = '<div class="no-results">Nenhuma delegacia encontrada nesta área</div>';
+            setStatus('Nenhuma delegacia encontrada.', 'info');
+            return;
+        }
+
+        delegacias.forEach(d => {
+            const item = document.createElement('div');
+            item.className = "list-item";
+            item.tabIndex = 0;
+            item.setAttribute('role', 'button');
+            item.setAttribute('aria-label', Selecionar ${d.nome});
+            item.innerHTML = <span>${d.nome}</span><span class="distance">-- km</span>;
+
+            item.onclick = async () => {
+                document.querySelectorAll('.list-item').forEach(e => e.classList.remove('active'));
+                item.classList.add('active');
+
+                try {
+                    setStatus(Calculando rota para ${d.nome}..., 'loading');
+
+                    if (routeLayer) map.removeLayer(routeLayer);
+                    if (destMarker) map.removeLayer(destMarker);
+
+                    destMarker = L.marker([d.lat, d.lon])
+                        .addTo(map)
+                        .bindPopup(d.nome)
+                        .openPopup();
+
+                    const routeData = await buscarRota(
+                        [userLocation.lat, userLocation.lon],
+                        [d.lat, d.lon]
+                    );
+                    
+                    const primaryColor = getComputedStyle(document.documentElement)
+                        .getPropertyValue('--cor-primaria').trim() || '#7E2A53';
+
+                    routeLayer = L.polyline(routeData.coords, {
+                        color: primaryColor, 
+                        weight: 5,
+                        opacity: 0.8
+                    }).addTo(map);
+
+                    map.fitBounds(routeLayer.getBounds(), { padding: [40, 40] });
+
+                    const distanciaKm = (routeData.summary.distance / 1000).toFixed(2);
+                    const duracaoMin = Math.round(routeData.summary.duration / 60);
+                    item.querySelector(".distance").innerText = ${distanciaKm} km;
+
+                    setStatus(
+                        Rota traçada até ${d.nome} — ${distanciaKm} km, ~${duracaoMin} min,
+                        'success'
+                    );
+                } catch (error) {
+                    console.error('Erro ao traçar rota:', error);
+                    setStatus(error.message, 'error');
+                }
+            };
+
+            item.onkeydown = (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
+            };
+
+            delegaciaListEl.appendChild(item);
+        });
+
+        setStatus(${delegacias.length} delegacias encontradas. Clique em uma para traçar rota., 'success');
+    } catch (error) {
+        console.error('Erro ao buscar delegacias:', error);
+        setStatus(error.message, 'error');
+    } finally {
+        toggleButtonLoading(locateBtn, false);
+    }
+};
+
+// Inicializa o mapa
+inicializarMapa();
