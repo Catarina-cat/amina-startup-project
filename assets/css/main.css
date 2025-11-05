@@ -3,24 +3,24 @@
  * Descrição: Arquivo principal de importação (substitui o antigo style.css no HTML)
  */
 
- /* 1. Variáveis */
-@import url('_variables.css'); 
+/* 1. Variáveis */
+@import '_variables.css'; /* <-- CORRIGIDO */
 
 /* 2. Estilos Globais */
-@import url('_global.css');
+@import '_global.css'; /* <-- CORRIGIDO */
 
 /* 3. Componentes */
-@import url('components/_header.css');
-@import url('components/_footer.css');
-@import url('components/_card.css');
-@import url('components/_form.css');
-@import url('components/_chat.css');
-@import url('components/_themes.css');
+@import 'components/_header.css'; /* <-- CORRIGIDO */
+@import 'components/_footer.css'; /* <-- CORRIGIDO */
+@import 'components/_card.css'; /* <-- CORRIGIDO */
+@import 'components/_form.css'; /* <-- CORRIGIDO */
+@import 'components/_chat.css'; /* <-- CORRIGIDO */
+@import 'components/_themes.css'; /* <-- CORRIGIDO */
 
 /* 4. Estilos de Páginas Específicas */
-@import url('pages/_base_page.css');
-@import url('pages/_login.css');
-@import url('pages/_mapa.css');
+@import 'pages/_base_page.css'; /* <-- CORRIGIDO */
+@import 'pages/_login.css'; /* <-- CORRIGIDO */
+@import 'pages/_mapa.css'; /* <-- CORRIGIDO */
 
 .btn-voltar {
   display: inline-block;
