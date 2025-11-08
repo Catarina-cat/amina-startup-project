@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (currentFontSize < 1.5) { // Limite de 150%
         currentFontSize += 0.1;
         document.documentElement.style.fontSize = `${currentFontSize}rem`;
+        window.scrollTo(0, document.body.scrollHeight) //Scroll até o final da tela para não gerar estranheza
       }
     });
   }
