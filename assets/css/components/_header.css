@@ -169,5 +169,8 @@
   .main-nav a {
     width: 90%;
     margin: 0 auto;
+
+    padding: 8px 16px;
+    font-size: 0.9rem;
   }
 }

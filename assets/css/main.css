@@ -4,23 +4,23 @@
  */
 
  /* 1. Variáveis */
-@import url('_variables.css'); 
+@import url('./_variables.css'); 
 
 /* 2. Estilos Globais */
-@import url('_global.css');
+@import url('./_global.css');
 
 /* 3. Componentes */
-@import url('components/_header.css');
-@import url('components/_footer.css');
-@import url('components/_card.css');
-@import url('components/_form.css');
-@import url('components/_chat.css');
-@import url('components/_themes.css');
+@import url('./components/_header.css');
+@import url('./components/_footer.css');
+@import url('./components/_card.css');
+@import url('./components/_form.css');
+@import url('./components/_chat.css');
+@import url('./components/_themes.css');
 
 /* 4. Estilos de Páginas Específicas */
-@import url('pages/_base_page.css');
-@import url('pages/_login.css');
-@import url('pages/_mapa.css');
+@import url('./pages/_base_page.css');
+@import url('./pages/_login.css');
+@import url('./pages/_mapa.css');
 
 .btn-voltar {
   display: inline-block;

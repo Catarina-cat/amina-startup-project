@@ -41,3 +41,15 @@
 .site-footer a:hover {
   color: var(--cor-accent-light);
 }
+
+@media (max-width: 768px) {
+  .site-footer {
+    /* Diminui o padding de 'lg' (2rem) para 'md' (1.5rem) */
+    padding: var(--espacamento-md);
+  }
+  
+  .site-footer p {
+    /* Diminui um pouco a fonte no mobile */
+    font-size: 0.875rem;
+  }
+}

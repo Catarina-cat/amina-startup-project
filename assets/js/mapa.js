@@ -24,7 +24,6 @@ const statusEl = document.getElementById('status');
 const locateBtn = document.getElementById('locateBtn');
 const delegaciaListEl = document.getElementById('delegaciaList');
 const sidebar = document.getElementById('sidebar');
-const toggleBtn = document.getElementById('toggleBtn');
 
 // Estado da aplicação
 let userMarker = null;
@@ -287,37 +286,6 @@ locateBtn.onclick = async () => {
         toggleButtonLoading(locateBtn, false);
     }
 };
-
-// ----------------------------
-// Controle da sidebar
-// ----------------------------
-toggleBtn.onclick = () => {
-    sidebar.classList.toggle('collapsed');
-    const isCollapsed = sidebar.classList.contains('collapsed');
-    toggleBtn.innerText = isCollapsed ? "⮞" : "⮜";
-    toggleBtn.setAttribute('aria-label', isCollapsed ? 'Abrir menu' : 'Fechar menu');
-
-    // 🎯 NOVO: Força o Leaflet a recalcular o tamanho do mapa após a transição da sidebar
-    setTimeout(() => { 
-        map.invalidateSize(); 
-    }, 350); 
-};
-
-document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 480 &&
-        !sidebar.contains(e.target) &&
-        e.target !== toggleBtn &&
-        !sidebar.classList.contains('collapsed')) {
-        sidebar.classList.add('collapsed');
-        toggleBtn.innerText = "⮞";
-        toggleBtn.setAttribute('aria-label', 'Abrir menu');
-        
-        // NOVO: Chama invalidateSize no mobile também ao fechar automaticamente
-        setTimeout(() => { 
-            map.invalidateSize(); 
-        }, 350);
-    }
-});
 
 // Inicializa o mapa
 inicializarMapa();
