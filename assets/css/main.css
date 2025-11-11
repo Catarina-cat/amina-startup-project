@@ -22,24 +22,54 @@
 @import url('./pages/_login.css');
 @import url('./pages/_mapa.css');
 
+/* Botão Voltar */
 .btn-voltar {
   display: inline-block;
-  margin-top: 12px;
-  background: transparent;
-  border: 1px solid var(--cor-accent, #a0527e);
-  color: var(--cor-accent, #a0527e);
-  padding: 8px 16px;
-  border-radius: 6px;
+  margin-top: var(--espacamento-md);
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(90deg, #A486BF, #E98AA3);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--peso-medio);
   text-decoration: none;
-  font-weight: 500;
-  text-align: center;
-  transition: 0.2s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(164, 134, 191, 0.4);
 }
 
 .btn-voltar:hover {
-  background: var(--cor-accent, #a0527e);
-  color: #fff;
+  background: linear-gradient(90deg, #E98AA3, #A486BF);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 138, 163, 0.5);
 }
 
+.btn-voltar:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(98, 31, 65, 0.4);
+}
+.site-header {
+  position: relative;
+  padding: 20px;
+  color: white; /* para o texto ficar visível sobre a imagem */
+  
+  background-image: url('../images/pro-J2gtH6eH.jpeg'); /* caminho da imagem */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+/* Camada de transparência (overlay) */
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* preto com 50% de transparência */
+  z-index: 0;
+}
 
+/* Para garantir que o conteúdo fique acima do overlay */
+.site-header > * {
+  position: relative;
+  z-index: 1;
+}
