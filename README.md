@@ -47,14 +47,14 @@ Você pode acessar o site publicado pelo GitHub Pages através do link abaixo:
 É necessária a instalação do node.js e das bibliotecas express, node-fetch e cors.
 
 Com o node.js instalado, execute os seguintes comandos no terminal
-    ```terminal
+    ```
     npm install express
     npm install node-fetch
     npm install cors
     ```
 
 Após isso, antes de iniciar o servidor com o Live Server, no terminal, rode server.js:
-```terminal
+```
     cd assets
     cd js
     node server.js
