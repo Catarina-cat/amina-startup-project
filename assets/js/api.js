@@ -1,55 +1,28 @@
-// ATENÇÃO: Nunca exponha sua chave de API em código de front-end em produção!
-// Use esta abordagem apenas para prototipagem/testes em ambientes controlados.
-const API_KEY = "AIzaSyCPjd2lyOWRNqa74fq22xLP45uQ-qBtVjo"; 
-const MODEL_NAME = "gemini-2.5-flash";
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`;
+const BACKEND_URL = "http://localhost:3000/api/gemini";
 
 export async function enviarPrompt(prompt) {
-    const userPrompt = prompt;
+  const payload = {
+    contents: [
+      {
+        role: "user",
+        parts: [{ text: prompt }]
+      }
+    ]
+  };
 
-    console.log(prompt);
+  const response = await fetch(BACKEND_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 
-    const payload = {
-        contents: [
-            {
-                parts: [
-                    {
-                        text: userPrompt
-                    }
-                ]
-            }
-        ]
-    };
+  const data = await response.json();
 
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
+  if (!response.ok) {
+    console.error("Erro na API:", data);
+    throw new Error(data.error?.message || "Erro desconhecido na API");
+  }
 
-        if (!response.ok) {
-            // Se a resposta HTTP não for 2xx, lance um erro.
-            const errorData = await response.json();
-            throw new Error(`Erro na API: ${response.status} - ${errorData.error.message}`);
-        }
-
-        const data = await response.json();
-        
-        // A resposta de texto geralmente está aninhada em 'candidates[0].content.parts[0].text'
-        const aiResponseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-        if (aiResponseText) {
-            return aiResponseText;
-        } else {
-            return "Resposta vazia ou em formato inesperado.";
-            console.error("Dados completos da resposta:", data);
-        }
-
-    } catch (error) {
-        respostaElement.textContent = `Ocorreu um erro: ${error.message}`;
-        console.error("Erro:", error);
-    }
+  // Retorna a resposta processada
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || "Sem resposta.";
 }

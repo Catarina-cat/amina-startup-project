@@ -42,3 +42,20 @@ Você pode acessar o site publicado pelo GitHub Pages através do link abaixo:
 
 ## 🌐 Vídeo de Apresentação
 🔗 [Clique aqui para assistir] (https://drive.google.com/file/d/1RwZJ4vbrnLql-R90AfrW01G3EPntVYuj/view)
+
+## Iniciar o servidor para consumo da API
+É necessária a instalação do node.js e das bibliotecas express, node-fetch e cors.
+
+Com o node.js instalado, execute os seguintes comandos no terminal
+    ```terminal
+    npm install express
+    npm install node-fetch
+    npm install cors
+    ```
+
+Após isso, antes de iniciar o servidor com o Live Server, no terminal, rode server.js:
+```terminal
+    cd assets
+    cd js
+    node server.js
+    ```
