@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Avisa o usuário e redireciona para o login
       alert("Você saiu com segurança.");
-      window.location.href = "login.html";
+      window.location.href = "index.html";
     });
   }
 
@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (currentFontSize < 1.5) { // Limite de 150%
         currentFontSize += 0.1;
         document.documentElement.style.fontSize = `${currentFontSize}rem`;
+        window.scrollTo(0, document.body.scrollHeight);
       }
     });
   }
