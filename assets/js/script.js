@@ -59,11 +59,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const fontDecrease = document.getElementById("font-decrease");
   const body = document.body;
 
+  // Verifica o tema salvo no localStorage
+  const currentTheme = localStorage.getItem("theme");
+
+  // Aplica o tema salvo assim que a página carrega
+  if (currentTheme === "dark") {
+    body.classList.add("theme-dark");
+  }
+
   let currentFontSize = 1; // 1 = 100% (1rem)
 
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
+      // 3. Alterna a classe como antes
       body.classList.toggle("theme-dark");
+
+      // 4. Salva a nova preferência no localStorage
+      if (body.classList.contains("theme-dark")) {
+        localStorage.setItem("theme", "dark");
+      } else {
+        localStorage.setItem("theme", "light");
+      }
     });
   }
 

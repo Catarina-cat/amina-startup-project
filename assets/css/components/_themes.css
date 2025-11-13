@@ -1,63 +1,437 @@
-/* --- TEMA ESCURO --- */
 body.theme-dark {
-  --cor-fundo: #552b38;     
-  --cor-fundo-secundario: #552b38;
-
-  --cor-primaria: #4d0e26; 
-  --cor-primaria-hover: #552b38;
-
-  --cor-texto-principal: #552b38;
-  --cor-texto-secundario: #4d0e26;   
-  --cor-borda: #552b38;      
-  --cor-accent: #a0526b;   
-
+  /* Paleta de cores escuras e profissionais */
+  --cor-fundo: #0f0f0f;
+  --cor-fundo-secundario: #1a1a1a;
+  --cor-fundo-card: #252525;
   
-  background: #552b38;
-  background-size: 800% 800%;
-  animation: gradientBG 12s ease infinite;
+  --cor-primaria: #2d1b2e;
+  --cor-primaria-hover: #3d2540;
+  --cor-accent: #8b4a6f;
+  --cor-accent-hover: #a05a7f;
+  
+  --cor-texto-principal: #e8e8e8;
+  --cor-texto-secundario: #b0b0b0;
+  --cor-texto-muted: #808080;
+  
+  --cor-borda: #333333;
+  --cor-borda-hover: #4a4a4a;
+  
+  /* Gradiente de fundo sutil */
+  background: linear-gradient(
+    135deg,
+    #0f0f0f 0%,
+    #1a1a1a 25%,
+    #2d1b2e 50%,
+    #1a1a1a 75%,
+    #0f0f0f 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
+  color: var(--cor-texto-principal);
 }
 
-body.theme-dark .site-header,
-body.theme-dark .site-footer {
-  background-color: var(--cor-clara); 
-  color: var(--cor-primaria); 
+/* Animação suave do gradiente */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
+
+/* ============================================
+  HEADER E FOOTER
+  ============================================ */
+
+body.theme-dark .site-header {
+  background-color: var(--cor-fundo-secundario);
+  border-bottom: 1px solid var(--cor-borda);
+  color: var(--cor-texto-principal);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+body.theme-dark .site-footer {
+  background-color: var(--cor-fundo-secundario);
+  border-top: 1px solid var(--cor-borda);
+  color: var(--cor-texto-secundario);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+  LOGO
+  ============================================ */
 
 body.theme-dark .logo {
-  border-color: var(--cor-primaria); 
+  border-color: var(--cor-accent);
+  color: var(--cor-texto-principal);
+  transition: all 0.3s ease;
 }
+
+body.theme-dark .logo:hover {
+  border-color: var(--cor-accent-hover);
+  transform: scale(1.05);
+}
+
+/* ============================================
+  NAVEGAÇÃO
+  ============================================ */
 
 body.theme-dark .main-nav a {
-  color: var(--cor-escura); 
+  color: var(--cor-texto-secundario);
+  transition: all 0.3s ease;
+  position: relative;
 }
+
+body.theme-dark .main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--cor-accent);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
 body.theme-dark .main-nav a:hover {
-  background: var(--cor-primaria); 
-  color: var(--cor-clara); 
+  background: transparent;
+  color: var(--cor-accent-hover);
 }
+
+body.theme-dark .main-nav a:hover::after {
+  width: 80%;
+}
+
+/* ============================================
+  CARDS
+  ============================================ */
 
 body.theme-dark .card {
-    background: var(--cor-neutra-clara); 
-    color: var(--cor-clara); 
-}
-body.theme-dark .card h3 {
-    color: var(--cor-clara); 
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto-principal);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
 }
 
-body.theme-dark .main-nav a:hover {
-  background: var(--cor-clara); 
-  color: var(--cor-hover); 
+body.theme-dark .card:hover {
+  border-color: var(--cor-accent);
+  box-shadow: 0 6px 20px rgba(139, 74, 111, 0.3);
+  transform: translateY(-2px);
 }
+
+body.theme-dark .card h3 {
+  color: var(--cor-accent-hover);
+  font-weight: 600;
+}
+
+body.theme-dark .card p {
+  color: var(--cor-texto-secundario);
+  line-height: 1.6;
+}
+
+/* ============================================
+  SEÇÕES DE CONTEÚDO
+  ============================================ */
 
 body.theme-dark .content-section {
-  background: var(--cor-neutra-clara);
-  
-  border-color: var(--cor-borda);
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-body.theme-dark .content-section p {
-  color: var(--cor-primaria); 
+body.theme-dark .content-section h2 {
+  color: var(--cor-accent-hover) !important;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
 }
 
 body.theme-dark .content-section h3 {
-  color: var(--cor-hover) !important; 
+  color: var(--cor-accent) !important;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+}
+
+body.theme-dark .content-section h4 {
+  color: #d0d0d0 !important;
+  font-weight: 600;
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+}
+
+body.theme-dark .content-section p {
+  color: var(--cor-texto-secundario);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+body.theme-dark .content-section ul,
+body.theme-dark .content-section ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+body.theme-dark .content-section li {
+  color: #ffffff !important;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+body.theme-dark .content-section li strong {
+  color: var(--cor-texto-principal); /* Usa a cor de texto principal clara (#e8e8e8) */
+  font-weight: 600;
+}
+
+body.theme-dark .content-section ul li::before {
+  color: #ffffff; /* Define o ponto como branco */
+}
+
+body.theme-dark .content-section p strong {
+  color: #ffffff; /* Define o número como branco */
+}
+
+
+body.theme-dark .content-section a {
+  color: var(--cor-accent-hover);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+body.theme-dark .content-section .map-layout .sidebar {
+  background: var(--cor-fundo);
+}
+
+body.theme-dark .content-section a:hover {
+  color: var(--cor-accent);
+}
+
+/* ============================================
+  PÁGINA SOBRE - ARTICLES DA EQUIPE
+  ============================================ */
+
+body.theme-dark .content-section article {
+  background: #3a3a3a;
+  border: 1px solid #4a4a4a;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.theme-dark .content-section article:hover {
+  background: #424242;
+  border-color: var(--cor-accent);
+  box-shadow: 0 4px 15px rgba(139, 74, 111, 0.3);
+  transform: translateY(-2px);
+}
+
+body.theme-dark .content-section article h4 {
+  color: var(--cor-accent-hover) !important;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+}
+
+body.theme-dark .content-section article p {
+  color: #d0d0d0 !important;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* ============================================
+  ELEMENTOS INTERATIVOS
+  ============================================ */
+
+body.theme-dark button,
+body.theme-dark .btn {
+  background: var(--cor-primaria);
+  color: var(--cor-texto-principal);
+  border: 1px solid var(--cor-accent);
+  transition: all 0.3s ease;
+}
+
+body.theme-dark button:hover,
+body.theme-dark .btn:hover {
+  background: var(--cor-primaria-hover);
+  border-color: var(--cor-accent-hover);
+  box-shadow: 0 4px 12px rgba(139, 74, 111, 0.4);
+  transform: translateY(-1px);
+}
+
+body.theme-dark input,
+body.theme-dark textarea,
+body.theme-dark select {
+  background: var(--cor-fundo-secundario);
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto-principal);
+}
+
+body.theme-dark input:focus,
+body.theme-dark textarea:focus,
+body.theme-dark select:focus {
+  border-color: var(--cor-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 74, 111, 0.2);
+}
+
+/* ============================================
+  PÁGINA DE CONTATO - INPUTS BRANCOS
+  ============================================ */
+
+body.theme-dark .contato input,
+body.theme-dark .contato textarea,
+body.theme-dark .contato select,
+body.theme-dark #contato input,
+body.theme-dark #contato textarea,
+body.theme-dark #contato select,
+body.theme-dark .contact-form input,
+body.theme-dark .contact-form textarea,
+body.theme-dark .contact-form select,
+body.theme-dark [data-page="contato"] input,
+body.theme-dark [data-page="contato"] textarea,
+body.theme-dark [data-page="contato"] select {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #cccccc !important;
+}
+
+body.theme-dark .contato input:focus,
+body.theme-dark .contato textarea:focus,
+body.theme-dark .contato select:focus,
+body.theme-dark #contato input:focus,
+body.theme-dark #contato textarea:focus,
+body.theme-dark #contato select:focus,
+body.theme-dark .contact-form input:focus,
+body.theme-dark .contact-form textarea:focus,
+body.theme-dark .contact-form select:focus,
+body.theme-dark [data-page="contato"] input:focus,
+body.theme-dark [data-page="contato"] textarea:focus,
+body.theme-dark [data-page="contato"] select:focus {
+  border-color: var(--cor-accent) !important;
+  box-shadow: 0 0 0 3px rgba(139, 74, 111, 0.2) !important;
+}
+
+body.theme-dark .contato input::placeholder,
+body.theme-dark .contato textarea::placeholder,
+body.theme-dark #contato input::placeholder,
+body.theme-dark #contato textarea::placeholder,
+body.theme-dark .contact-form input::placeholder,
+body.theme-dark .contact-form textarea::placeholder,
+body.theme-dark [data-page="contato"] input::placeholder,
+body.theme-dark [data-page="contato"] textarea::placeholder {
+  color: #666666 !important;
+}
+
+body.theme-dark .contato label,
+body.theme-dark #contato label,
+body.theme-dark .contact-form label,
+body.theme-dark [data-page="contato"] label {
+  color: #d0d0d0 !important;
+  font-weight: 500;
+}
+
+body.theme-dark .contato h1,
+body.theme-dark .contato h2,
+body.theme-dark .contato h3,
+body.theme-dark #contato h1,
+body.theme-dark #contato h2,
+body.theme-dark #contato h3,
+body.theme-dark .contact-form h1,
+body.theme-dark .contact-form h2,
+body.theme-dark .contact-form h3,
+body.theme-dark [data-page="contato"] h1,
+body.theme-dark [data-page="contato"] h2,
+body.theme-dark [data-page="contato"] h3 {
+  color: var(--cor-accent-hover) !important;
+}
+
+/* ============================================
+  SCROLLBAR CUSTOMIZADA
+  ============================================ */
+
+body.theme-dark ::-webkit-scrollbar {
+  width: 12px;
+}
+
+body.theme-dark ::-webkit-scrollbar-track {
+  background: var(--cor-fundo-secundario);
+}
+
+body.theme-dark ::-webkit-scrollbar-thumb {
+  background: var(--cor-accent);
+  border-radius: 6px;
+  border: 2px solid var(--cor-fundo-secundario);
+}
+
+body.theme-dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--cor-accent-hover);
+}
+
+/* ============================================
+  PÁGINA DO MAPA - SIDEBAR
+  ============================================ */
+
+body.theme-dark .map-layout .sidebar {
+  background: var(--cor-fundo-card);
+  color: var(--cor-texto-principal);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+body.theme-dark .map-layout .header .title {
+  color: var(--cor-accent-hover);
+}
+
+body.theme-dark .map-layout .header .subtitle {
+  color: var(--cor-texto-secundario);
+}
+
+body.theme-dark .map-layout .list-item {
+  background: var(--cor-fundo-secundario);
+  color: var(--cor-texto-secundario);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+body.theme-dark .map-layout .list-item:hover,
+body.theme-dark .map-layout .list-item:focus {
+  background: #3a3a3a;
+  color: var(--cor-texto-principal);
+}
+
+body.theme-dark .map-layout .list-item.active {
+  background: var(--cor-primaria-hover);
+  border-left-color: var(--cor-accent);
+  color: var(--cor-texto-principal);
+}
+
+body.theme-dark .map-layout .distance {
+  color: var(--cor-accent);
+}
+
+body.theme-dark .map-layout #status {
+  background: var(--cor-fundo-secundario);
+  color: var(--cor-texto-muted);
+}
+
+body.theme-dark .map-layout .status-error {
+  color: #ff6b6b;
+  background: rgba(204, 51, 51, 0.1);
+}
+
+body.theme-dark .map-layout .status-success {
+  color: #63e6be;
+  background: rgba(51, 204, 51, 0.1);
+}
+
+body.theme-dark .map-layout .toggle-btn {
+  background: var(--cor-primaria);
+}
+body.theme-dark .map-layout .toggle-btn:hover {
+  background: var(--cor-primaria-hover);
 }
