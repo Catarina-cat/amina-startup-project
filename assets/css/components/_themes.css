@@ -1,15 +1,18 @@
 /* --- TEMA ESCURO --- */
 body.theme-dark {
-  /* Inverte as cores primárias e claras */
-  --cor-primaria: #ECDDED; /* Rosa claro vira a "primária" (para textos/destaques) */
-  --cor-secundaria: #46103A; /* Roxo escuro vira o "fundo" */
-  --cor-escura: #FFFFFF; /* Branco vira a cor de texto principal */
-  --cor-clara: #22081C; /* Um fundo quase preto para headers/footers */
-  --cor-hover: #8A71A2; /* Mantém o lavanda */
-  --cor-neutra-clara: #331A2D; /* Fundo escuro para cards */
-  --cor-borda: #7e5478; 
+  --cor-fundo: #552b38;     
+  --cor-fundo-secundario: #552b38;
+
+  --cor-primaria: #4d0e26; 
+  --cor-primaria-hover: #552b38;
+
+  --cor-texto-principal: #552b38;
+  --cor-texto-secundario: #4d0e26;   
+  --cor-borda: #552b38;      
+  --cor-accent: #a0526b;   
+
   
-  background: linear-gradient(270deg, #2a0a20, #3d1031, #1e0717, #1b0615);
+  background: #552b38;
   background-size: 800% 800%;
   animation: gradientBG 12s ease infinite;
 }
