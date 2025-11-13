@@ -53,7 +53,7 @@
   padding: 20px;
   color: white; /* para o texto ficar visível sobre a imagem */
   
-  background-image: url('../images/pro-J2gtH6eH.jpeg'); /* caminho da imagem */
+  background-image: url('../images/nova.jpeg.jpeg'); /* caminho da imagem */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -85,3 +85,4 @@ body.login-page {
   background-repeat: no-repeat;
   height: 100vh;
 }
+
