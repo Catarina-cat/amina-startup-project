@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacamento-sm);
-  background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+  background: linear-gradient(to bottom, #a05a7f 0%, #2d1b2e 100%);
 }
 
 /* Scrollbar do Chat */
@@ -82,7 +82,7 @@
 }
 
 .msg-container.user .msg {
-  background: linear-gradient(135deg, var(--cor-primaria) 0%, #621F41 100%);
+  background: linear-gradient(135deg, var(--cor-primaria) 0%, #eebfdd 100%);
   color: var(--cor-clara);
   border-bottom-right-radius: 4px;
 }
@@ -139,7 +139,7 @@
 .typing {
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, var(--cor-secundaria) 0%, #f8e8f4 100%);
+  background: linear-gradient(135deg, var(--cor-secundaria) 0%, #4d033a 100%);
   padding: 12px 18px;
   border-radius: 18px;
   border-bottom-left-radius: 4px;
