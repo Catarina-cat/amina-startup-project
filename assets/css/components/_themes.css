@@ -2,15 +2,15 @@ body.theme-dark {
   /* Paleta de cores escuras e profissionais */
   --cor-fundo: #0f0f0f;
   --cor-fundo-secundario: #1a1a1a;
-  --cor-fundo-card: #414141;
+  --cor-fundo-card: #252525;
   
   --cor-primaria: #2d1b2e;
   --cor-primaria-hover: #3d2540;
   --cor-accent: #8b4a6f;
   --cor-accent-hover: #a05a7f;
   
-  --cor-texto-principal: #a05a7f;
-  --cor-texto-secundario: #0f0f0f;
+  --cor-texto-principal: #e8e8e8;
+  --cor-texto-secundario: #b0b0b0;
   --cor-texto-muted: #808080;
   
   --cor-borda: #333333;

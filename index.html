@@ -37,30 +37,23 @@
 
     <section id="cred-section" class="content-section login-container">
        <a href="home.html">
-        <img src="./assets/images/logo.png" alt="Logo da Startup Amina" class="logo" style="margin-bottom: 1rem;">
+        <img src="./assets/images/logo.nova.jpeg" alt="Logo da Startup Amina" class="logo" style="margin-bottom: 1rem;">
       </a>
       <h2>Verificação de Credencial</h2>
       <form id="cred-form" class="form">
-  <div class="form-group">
-    <label for="cred-type">Tipo de Profissional</label>
-    <input type="text" id="cred-type" readonly>
-  </div>
-
-  <div class="form-group">
-    <label for="credential">Número da Credencial</label>
-    <input type="text" id="credential" placeholder="Ex: CRM-12345 ou OAB-67890" required>
-  </div>
-
-  <!-- Contêiner para os dois botões -->
-  <div class="btn-stack">
-    <button type="submit" class="btn-submit">Verificar</button>
-    <a href="index.html" class="btn-voltar">Voltar</a>
-  </div>
-
-  <!-- Resultado fica fora do contêiner de botões -->
-  <p id="cred-result"></p>
-</form>
-
+        <div class="form-group">
+          <label for="cred-type">Tipo de Profissional</label>
+          <input type="text" id="cred-type" readonly>
+        </div>
+        <div class="form-group">
+          <label for="credential">Número da Credencial</label>
+          <input type="text" id="credential" placeholder="Ex: CRM-12345 ou OAB-67890" required>
+        </div>
+        <button type="submit" class="btn-submit">Verificar</button>
+        <p id="cred-result"></p>
+        <!-- Também adiciona botão "Voltar" aqui -->
+        <a href="index.html" class="btn-voltar">Voltar</a>
+      </form>
     </section>
   </main>
       

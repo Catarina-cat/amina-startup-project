@@ -93,6 +93,8 @@ Use apenas para testes locais com o Live Server.
 Acesse o projeto no github:
 [Clique aqui para acessar] https://github.com/Catarina-cat/amina-startup-project
 
+Você pode acessar o site publicado pelo GitHub Pages através do link abaixo:
+🔗 [Clique aqui para acessar](https://catarina-cat.github.io/amina-startup-project/)
 
 ## Vídeo de Apresentação
 Esse vídeo apresenta a **versão antiga** do nosso projeto
