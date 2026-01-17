@@ -1,7 +1,7 @@
 // ATENÇÃO: Nunca exponha sua chave de API em código de front-end em produção!
 // Use esta abordagem apenas para prototipagem/testes em ambientes controlados.
-const API_KEY = "AIzaSyDDhe13f1JECF1Hom0Xil3XT_xW0EWrMxE"; 
-const MODEL_NAME = "gemini-2.5-flash";
+const API_KEY = ""; 
+const MODEL_NAME = "";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`;
 
 export async function enviarPrompt(prompt) {
