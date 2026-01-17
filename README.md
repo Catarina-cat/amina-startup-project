@@ -100,3 +100,5 @@ Esse vídeo apresenta a **versão antiga** do nosso projeto
 
 🔗 [Clique aqui para assistir] (https://drive.google.com/file/d/1RwZJ4vbrnLql-R90AfrW01G3EPntVYuj/view)
 
+Este projeto é um protótipo acadêmico. Não deve ser utilizado em produção.
+
