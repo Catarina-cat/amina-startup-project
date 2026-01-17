@@ -106,7 +106,7 @@ async function buscarDelegacias(lat, lon) {
 // ----------------------------
 async function buscarRota(startCoords, endCoords) {
   // Usa a API de rotas gratuita do openrouteservice
-  const apiKey = "5b3ce3597851110001cf6248f8f45a36a1e341eea5a17a4f4b4a08f8"; // 🔑 Chave pública de demonstração
+  const apiKey = ""; // 🔑 Chave pública de demonstração
   const start = ${startCoords[1]},${startCoords[0]};
   const end = ${endCoords[1]},${endCoords[0]};
 
